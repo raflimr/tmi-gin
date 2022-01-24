@@ -9,6 +9,7 @@ import (
 type Querier interface {
 	ChangePassword(ctx context.Context, arg ChangePasswordParams) error
 	CheckEmail(ctx context.Context, email string) (Mahasiswa, error)
+	CheckToken(ctx context.Context, token string) (Mahasiswa, error)
 	CheckUsername(ctx context.Context, username string) (Mahasiswa, error)
 	CreateMahasiswa(ctx context.Context, arg CreateMahasiswaParams) (Mahasiswa, error)
 	CreatePractice(ctx context.Context, arg CreatePracticeParams) (Practice, error)

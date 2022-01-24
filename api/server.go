@@ -54,16 +54,18 @@ func NewServer(config Config, store db.Store) (*Server, error) {
 
 func (server *Server) setupRouter() {
 	router := gin.Default()
-	router.POST("/mahasiswas", server.createMahasiswa)
-	router.POST("/mahasiswas/login", server.loginMahasiswa)
-	router.GET("/mahasiswas/home-dashboard", server.homeDashboard)
-	router.GET("/mahasiswas/practice", server.listPractices)
-	router.GET("/mahasiswas/practice/:id_category", server.listPracticesByCategory)
-	router.POST("/mahasiswas/forgot-password", server.postEmailOtp)
-	router.PUT("/mahasiswas/forgot-password/send", server.updateOTP)
+	router.POST("/user", server.createMahasiswa)
+	router.POST("/user/login", server.loginMahasiswa)
+	router.GET("/user/home-dashboard", server.homeDashboard)
+	router.GET("/user/practice", server.listPractices)
+	router.GET("/user/practice/:id_category", server.listPracticesByCategory)
+	router.POST("/user/forgot-password", server.postEmailOtp)
+	router.PUT("/user/forgot-password/send", server.updateOTP)
+	router.POST("/user/token-verif/send", server.TokenVerifikasi)
+	router.PUT("/user/change-password", server.changePassword)
 
 	authRoutes := router.Group("/").Use(authMiddleware(server.tokenMaker))
-	authRoutes.PUT("/mahasiswas/update/:id", server.updateMahasiswa)
+	authRoutes.PUT("/user/update/:id", server.updateMahasiswa)
 
 	server.router = router
 }

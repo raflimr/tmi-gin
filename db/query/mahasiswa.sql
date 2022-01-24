@@ -51,3 +51,6 @@ SET
     token = $2
 WHERE
     email = $1;
+
+-- name: CheckToken :one
+SELECT * FROM mahasiswa WHERE token = $1;

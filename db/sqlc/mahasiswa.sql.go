@@ -54,6 +54,34 @@ func (q *Queries) CheckEmail(ctx context.Context, email string) (Mahasiswa, erro
 	return i, err
 }
 
+const checkToken = `-- name: CheckToken :one
+SELECT id, username, password, nomor_hp, email, url_foto, nama_lengkap, tanggal_lahir, jenis_kelamin, university, nim, jurusan, tahun_masuk, kota_kabupaten, token, created_at FROM mahasiswa WHERE token = $1
+`
+
+func (q *Queries) CheckToken(ctx context.Context, token string) (Mahasiswa, error) {
+	row := q.db.QueryRowContext(ctx, checkToken, token)
+	var i Mahasiswa
+	err := row.Scan(
+		&i.ID,
+		&i.Username,
+		&i.Password,
+		&i.NomorHp,
+		&i.Email,
+		&i.UrlFoto,
+		&i.NamaLengkap,
+		&i.TanggalLahir,
+		&i.JenisKelamin,
+		&i.University,
+		&i.Nim,
+		&i.Jurusan,
+		&i.TahunMasuk,
+		&i.KotaKabupaten,
+		&i.Token,
+		&i.CreatedAt,
+	)
+	return i, err
+}
+
 const checkUsername = `-- name: CheckUsername :one
 SELECT id, username, password, nomor_hp, email, url_foto, nama_lengkap, tanggal_lahir, jenis_kelamin, university, nim, jurusan, tahun_masuk, kota_kabupaten, token, created_at FROM mahasiswa WHERE username = $1
 `
@@ -250,7 +278,7 @@ WHERE
 
 type UpdateOTPInDBParams struct {
 	Email string `json:"email"`
-	Token *string `json:"token"`
+	Token string `json:"token"`
 }
 
 func (q *Queries) UpdateOTPInDB(ctx context.Context, arg UpdateOTPInDBParams) error {

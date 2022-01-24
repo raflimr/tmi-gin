@@ -25,7 +25,6 @@ func timer(timeout int, ch chan<- bool) {
 func watcher(timeout int, ch <-chan bool) {
 	<-ch
 	fmt.Println("\ntime out! no answer more than", timeout, "seconds")
-	os.Exit(0)
 }
 
 func GenerateRandomNumber() string {
@@ -37,21 +36,24 @@ func GenerateRandomNumber() string {
 
 	return out.String()
 }
+
 func OTPEmail(email string) (*string, error) {
-	// config, err := LoadConfig(".")
-	// if err != nil {
-	// 	log.Fatal("cannot load config:", err)
-	// }
+
+	if otp == "" {
+		otp = GenerateRandomNumber()
+	} else {
+		otp = GenerateRandomNumber()
+	}
 
 	// Reveal Configs Vars
 	emailData := os.Getenv("EMAIL_OTP")
 	if emailData == "" {
-		emailData = "email"
+		emailData = "your-email"
 	}
 
 	passwordData := os.Getenv("PASSWORD_OTP")
 	if passwordData == "" {
-		passwordData = "passEmail"
+		passwordData = "your-password"
 	}
 
 	// Sender data.

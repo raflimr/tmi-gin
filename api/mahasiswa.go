@@ -247,7 +247,7 @@ func (server *Server) updateOTP(ctx *gin.Context) {
 
 	arg := db.UpdateOTPInDBParams{
 		Email: req.Email,
-		Token: otp,
+		Token: *otp,
 	}
 
 	err := server.store.UpdateOTPInDB(context.TODO(), arg)
@@ -257,10 +257,51 @@ func (server *Server) updateOTP(ctx *gin.Context) {
 
 	ctx.JSON(http.StatusOK, arg)
 }
-echo "# tmi-gin" >> README.md
-git init
-git add README.md
-git commit -m "first commit"
-git branch -M main
-git remote add origin https://github.com/rafllimr/tmi-gin.git
-git push -u origin main
+
+type tokenVerifikasi struct {
+	Token string `json:"token" binding:"numeric"`
+}
+
+func (server *Server) TokenVerifikasi(ctx *gin.Context) {
+	var req tokenVerifikasi
+	if err := ctx.ShouldBindJSON(&req); err != nil {
+		ctx.JSON(http.StatusBadRequest, errorResponse(err))
+		return
+	}
+
+	token, err := server.store.CheckToken(ctx, req.Token)
+	switch {
+	case token.Token == req.Token && err == nil:
+		ctx.JSON(http.StatusAccepted, "Token berhasil diinput")
+		return
+	default:
+		ctx.JSON(http.StatusNotAcceptable, "Token Expired")
+		return
+	}
+}
+
+type changePassword struct {
+	Email    string `json:"email" binding:"email"`
+	Password string `json:"password" binding:"required,min=8"`
+}
+
+func (server *Server) changePassword(ctx *gin.Context) {
+	var req changePassword
+	if err := ctx.ShouldBindJSON(&req); err != nil {
+		ctx.JSON(http.StatusBadRequest, errorResponse(err))
+		return
+	}
+
+	arg := db.ChangePasswordParams{
+		Email:    req.Email,
+		Password: req.Password,
+	}
+
+	err := server.store.ChangePassword(ctx, arg)
+	if err != nil {
+		ctx.JSON(http.StatusBadRequest, "Input yang benar")
+	}
+
+	ctx.JSON(http.StatusAccepted, arg)
+
+}
