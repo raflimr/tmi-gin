@@ -25,7 +25,7 @@ type CreatePracticeParams struct {
 	UrlVideoPractice  sql.NullString `json:"url_video_practice"`
 	TaskPractice      sql.NullString `json:"task_practice"`
 	UjianPractice     sql.NullString `json:"ujian_practice"`
-	IDAdmin           sql.NullInt32  `json:"id_admin"`
+	IDAdmin           NullInt32  `json:"id_admin"`
 	IDCategory        int32          `json:"id_category"`
 }
 
