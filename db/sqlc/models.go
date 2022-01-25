@@ -20,7 +20,7 @@ type Category struct {
 	ID           int32          `json:"id"`
 	NameCategory sql.NullString `json:"name_category"`
 	CreatedAt    time.Time      `json:"created_at"`
-	FinishedAt   sql.NullTime   `json:"finished_at"`
+	FinishedAt   time.Time   `json:"finished_at"`
 }
 
 type Challenge struct {
@@ -35,7 +35,7 @@ type Challenge struct {
 	IDAdmin           sql.NullInt32  `json:"id_admin"`
 	IDCategory        sql.NullInt32  `json:"id_category"`
 	CreatedAt         time.Time      `json:"created_at"`
-	FinishedAt        sql.NullTime   `json:"finishedAt"`
+	FinishedAt        time.Time   `json:"finishedAt"`
 }
 
 type Event struct {
@@ -47,8 +47,8 @@ type Event struct {
 	TanggalEvent   sql.NullString `json:"tanggal_event"`
 	IDMahasiswa    int32          `json:"id_mahasiswa"`
 	IDAdmin        sql.NullInt32  `json:"id_admin"`
-	CreatedAt      sql.NullTime   `json:"created_at"`
-	FinishedAt     sql.NullTime   `json:"finished_at"`
+	CreatedAt      time.Time   `json:"created_at"`
+	FinishedAt     time.Time   `json:"finished_at"`
 }
 
 type Mahasiswa struct {
@@ -82,7 +82,7 @@ type Practice struct {
 	IDAdmin           sql.NullInt32  `json:"id_admin"`
 	IDCategory        int32          `json:"id_category"`
 	CreatedAt         time.Time      `json:"created_at"`
-	FinishedAt        sql.NullTime   `json:"finished_at"`
+	FinishedAt        time.Time   `json:"finished_at"`
 }
 
 type StatusChallenge struct {
@@ -91,7 +91,7 @@ type StatusChallenge struct {
 	IDMahasiswa    int32         `json:"id_mahasiswa"`
 	IDChallenge    sql.NullInt32 `json:"id_challenge"`
 	CheckChallenge sql.NullInt32 `json:"check_challenge"`
-	FinishedAt     sql.NullTime  `json:"finishedAt"`
+	FinishedAt     time.Time  `json:"finishedAt"`
 }
 
 type StatusPractice struct {
@@ -100,5 +100,5 @@ type StatusPractice struct {
 	IDMahasiswa   int32         `json:"id_mahasiswa"`
 	IDPractice    sql.NullInt32 `json:"id_practice"`
 	CheckPractice sql.NullInt32 `json:"check_practice"`
-	FinishedAt    sql.NullTime  `json:"finishedAt"`
+	FinishedAt    time.Time  `json:"finishedAt"`
 }
