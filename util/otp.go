@@ -28,7 +28,7 @@ func watcher(timeout int, ch <-chan bool) {
 }
 
 func GenerateRandomNumber() string {
-	rand.Seed(time.Now().UnixMilli())
+	//rand.Seed(time.Now().UnixMilli())
 	var out strings.Builder
 	for i := 0; i < 4; i++ {
 		out.WriteString(strconv.Itoa(rand.Intn(9)))
@@ -48,12 +48,12 @@ func OTPEmail(email string) (*string, error) {
 	// Reveal Configs Vars
 	emailData := os.Getenv("EMAIL_OTP")
 	if emailData == "" {
-		emailData = "your-email"
+		emailData = "ajar3063@gmail.com"
 	}
 
 	passwordData := os.Getenv("PASSWORD_OTP")
 	if passwordData == "" {
-		passwordData = "your-password"
+		passwordData = "rasta!aja123"
 	}
 
 	// Sender data.

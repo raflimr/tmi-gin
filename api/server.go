@@ -34,7 +34,7 @@ func NewServer(config Config, store db.Store) (*Server, error) {
 	tokenKey := os.Getenv("TOKEN_SYMMETRIC_KEY")
 
 	if tokenKey == "" {
-		tokenKey = "-"
+		tokenKey = "12345678901234567890123456789012"
 	}
 
 	tokenMaker, err := token.NewPasetoMaker(tokenKey)
