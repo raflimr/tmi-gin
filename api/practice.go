@@ -67,3 +67,55 @@ func (server *Server) listPractices(ctx *gin.Context) {
 
 	ctx.JSON(http.StatusOK, practice)
 }
+
+type practiceDetailRequest struct {
+	ID int32 `form:"id_practice"`
+}
+
+func (server *Server) practiceDetailStatistik(ctx *gin.Context) {
+	var req practiceDetailRequest
+	if err := ctx.ShouldBindQuery(&req); err != nil {
+		ctx.JSON(http.StatusBadRequest, errorResponse(err))
+		return
+	}
+
+	practice, err := server.store.InfoPracticeStatistik(ctx, req.ID)
+	if err != nil {
+		ctx.JSON(http.StatusInternalServerError, errorResponse(err))
+		return
+	}
+
+	ctx.JSON(http.StatusOK, practice)
+}
+
+func (server *Server) practiceDetail(ctx *gin.Context) {
+	var req practiceDetailRequest
+	if err := ctx.ShouldBindQuery(&req); err != nil {
+		ctx.JSON(http.StatusBadRequest, errorResponse(err))
+		return
+	}
+
+	practice, err := server.store.InfoPractice(ctx, req.ID)
+	if err != nil {
+		ctx.JSON(http.StatusInternalServerError, errorResponse(err))
+		return
+	}
+
+	ctx.JSON(http.StatusOK, practice)
+}
+
+func (server *Server) practiceVideoById(ctx *gin.Context) {
+	var req practiceDetailRequest
+	if err := ctx.ShouldBindQuery(&req); err != nil {
+		ctx.JSON(http.StatusBadRequest, errorResponse(err))
+		return
+	}
+
+	practice, err := server.store.VideoInPractice(ctx, req.ID)
+	if err != nil {
+		ctx.JSON(http.StatusInternalServerError, errorResponse(err))
+		return
+	}
+
+	ctx.JSON(http.StatusOK, practice)
+}

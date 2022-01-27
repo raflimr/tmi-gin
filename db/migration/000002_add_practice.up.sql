@@ -4,7 +4,6 @@ CREATE TABLE "practice" (
   "judul_practice" varchar,
   "definisi" varchar,
   "deskripsi" varchar,
-  "url_video_practice" varchar,
   "task_practice" varchar,
   "ujian_practice" varchar,
   "id_admin" integer,
@@ -76,6 +75,14 @@ CREATE TABLE "admin" (
   "created_at" timestamp NOT NULL DEFAULT (NOW())
 );
 
+CREATE TABLE "video" (
+  "id" SERIAL PRIMARY KEY,
+  "url_video" varchar,
+  "practice_id" int NOT NULL,
+  "created_at" timestamp NOT NULL DEFAULT (NOW()),
+  "update_at" timestamp
+);
+
 ALTER TABLE "practice" ADD FOREIGN KEY ("id_admin") REFERENCES "admin" ("id");
 
 ALTER TABLE "statusPractice" ADD FOREIGN KEY ("id_mahasiswa") REFERENCES "mahasiswa" ("id");
@@ -87,3 +94,5 @@ ALTER TABLE "statusChallenge" ADD FOREIGN KEY ("id_mahasiswa") REFERENCES "mahas
 ALTER TABLE "statusChallenge" ADD FOREIGN KEY ("id_challenge") REFERENCES "challenge" ("id");
 
 ALTER TABLE "practice" ADD FOREIGN KEY ("id_category") REFERENCES "category" ("id");
+
+ALTER TABLE "video" ADD FOREIGN KEY ("practice_id") REFERENCES "practice" ("id");

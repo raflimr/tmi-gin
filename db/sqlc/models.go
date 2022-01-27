@@ -7,11 +7,6 @@ import (
 	"time"
 )
 
-type NullInt32 struct {
-	Int32 int32
-	Valid bool // Valid is true if Int32 is not NULL
-}
-
 type Admin struct {
 	ID        int32          `json:"id"`
 	Job       sql.NullString `json:"job"`
@@ -25,7 +20,7 @@ type Category struct {
 	ID           int32          `json:"id"`
 	NameCategory sql.NullString `json:"name_category"`
 	CreatedAt    time.Time      `json:"created_at"`
-	FinishedAt   time.Time   `json:"finished_at"`
+	FinishedAt   sql.NullTime   `json:"finished_at"`
 }
 
 type Challenge struct {
@@ -37,10 +32,10 @@ type Challenge struct {
 	TaskChallenge     sql.NullString `json:"task_challenge"`
 	UjianChallenge    sql.NullString `json:"ujian_challenge"`
 	SkorChallenge     sql.NullString `json:"skor_challenge"`
-	IDAdmin           NullInt32  `json:"id_admin"`
-	IDCategory        NullInt32  `json:"id_category"`
+	IDAdmin           sql.NullInt32  `json:"id_admin"`
+	IDCategory        sql.NullInt32  `json:"id_category"`
 	CreatedAt         time.Time      `json:"created_at"`
-	FinishedAt        time.Time   `json:"finishedAt"`
+	FinishedAt        sql.NullTime   `json:"finishedAt"`
 }
 
 type Event struct {
@@ -51,9 +46,9 @@ type Event struct {
 	KriteriaEvent  sql.NullString `json:"kriteria_event"`
 	TanggalEvent   sql.NullString `json:"tanggal_event"`
 	IDMahasiswa    int32          `json:"id_mahasiswa"`
-	IDAdmin        NullInt32  `json:"id_admin"`
-	CreatedAt      time.Time   `json:"created_at"`
-	FinishedAt     time.Time   `json:"finished_at"`
+	IDAdmin        sql.NullInt32  `json:"id_admin"`
+	CreatedAt      sql.NullTime   `json:"created_at"`
+	FinishedAt     sql.NullTime   `json:"finished_at"`
 }
 
 type Mahasiswa struct {
@@ -81,29 +76,36 @@ type Practice struct {
 	JudulPractice     sql.NullString `json:"judul_practice"`
 	Definisi          sql.NullString `json:"definisi"`
 	Deskripsi         sql.NullString `json:"deskripsi"`
-	UrlVideoPractice  sql.NullString `json:"url_video_practice"`
 	TaskPractice      sql.NullString `json:"task_practice"`
 	UjianPractice     sql.NullString `json:"ujian_practice"`
-	IDAdmin           NullInt32  `json:"id_admin"`
+	IDAdmin           sql.NullInt32  `json:"id_admin"`
 	IDCategory        int32          `json:"id_category"`
 	CreatedAt         time.Time      `json:"created_at"`
-	FinishedAt        time.Time   `json:"finished_at"`
+	FinishedAt        sql.NullTime   `json:"finished_at"`
 }
 
 type StatusChallenge struct {
 	ID             int32         `json:"id"`
-	SkorChallenge  NullInt32 `json:"skor_challenge"`
+	SkorChallenge  sql.NullInt32 `json:"skor_challenge"`
 	IDMahasiswa    int32         `json:"id_mahasiswa"`
-	IDChallenge    NullInt32 `json:"id_challenge"`
-	CheckChallenge NullInt32 `json:"check_challenge"`
-	FinishedAt     time.Time  `json:"finishedAt"`
+	IDChallenge    sql.NullInt32 `json:"id_challenge"`
+	CheckChallenge sql.NullInt32 `json:"check_challenge"`
+	FinishedAt     sql.NullTime  `json:"finishedAt"`
 }
 
 type StatusPractice struct {
 	ID            int32         `json:"id"`
-	SkorPractice  NullInt32 `json:"skor_practice"`
+	SkorPractice  sql.NullInt32 `json:"skor_practice"`
 	IDMahasiswa   int32         `json:"id_mahasiswa"`
-	IDPractice    NullInt32 `json:"id_practice"`
-	CheckPractice NullInt32 `json:"check_practice"`
-	FinishedAt    time.Time  `json:"finishedAt"`
+	IDPractice    sql.NullInt32 `json:"id_practice"`
+	CheckPractice sql.NullInt32 `json:"check_practice"`
+	FinishedAt    sql.NullTime  `json:"finishedAt"`
+}
+
+type Video struct {
+	ID         int32          `json:"id"`
+	UrlVideo   sql.NullString `json:"url_video"`
+	PracticeID int32          `json:"practice_id"`
+	CreatedAt  time.Time      `json:"created_at"`
+	UpdateAt   sql.NullTime   `json:"update_at"`
 }

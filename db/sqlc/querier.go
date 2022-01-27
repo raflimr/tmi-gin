@@ -14,11 +14,15 @@ type Querier interface {
 	CreateMahasiswa(ctx context.Context, arg CreateMahasiswaParams) (Mahasiswa, error)
 	CreatePractice(ctx context.Context, arg CreatePracticeParams) (Practice, error)
 	GetMahasiswa(ctx context.Context, arg GetMahasiswaParams) (Mahasiswa, error)
+	GetPracticeById(ctx context.Context, id int32) (Practice, error)
 	HomeDashboard(ctx context.Context, idMahasiswa int32) (HomeDashboardRow, error)
+	InfoPractice(ctx context.Context, id int32) (Practice, error)
+	InfoPracticeStatistik(ctx context.Context, id int32) (InfoPracticeStatistikRow, error)
 	ListPractice(ctx context.Context, arg ListPracticeParams) ([]Practice, error)
 	ListPracticeByCategory(ctx context.Context, arg ListPracticeByCategoryParams) ([]Practice, error)
 	UpdateMahasiswa(ctx context.Context, arg UpdateMahasiswaParams) error
 	UpdateOTPInDB(ctx context.Context, arg UpdateOTPInDBParams) error
+	VideoInPractice(ctx context.Context, practiceID int32) ([]VideoInPracticeRow, error)
 }
 
 var _ Querier = (*Queries)(nil)

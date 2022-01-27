@@ -63,6 +63,9 @@ func (server *Server) setupRouter() {
 	router.PUT("/user/forgot-password/send", server.updateOTP)
 	router.POST("/user/token-verif/send", server.TokenVerifikasi)
 	router.PUT("/user/change-password", server.changePassword)
+	router.GET("/user/practice-detail", server.practiceDetail)
+	router.GET("/user/practice-statistik", server.practiceDetailStatistik)
+	router.GET("/user/practice-video", server.practiceVideoById)
 
 	authRoutes := router.Group("/").Use(authMiddleware(server.tokenMaker))
 	authRoutes.PUT("/user/update/:id", server.updateMahasiswa)

@@ -23,21 +23,16 @@ WHERE
 GROUP BY m.id
 `
 
-
-type NullInt64 struct {
-    Int64 int64
-    Valid bool // Valid is true if Int64 is not NULL
-}
 type HomeDashboardRow struct {
 	Username          string `json:"username"`
 	NamaLengkap       sql.NullString `json:"nama_lengkap"`
 	UrlFoto           sql.NullString `json:"url_foto"`
 	University        sql.NullString `json:"university"`
-	FinishedPractice  NullInt64  `json:"finished_practice"`
+	FinishedPractice  sql.NullInt32  `json:"finished_practice"`
 	JumlahPractice    int64  `json:"jumlah_practice"`
-	FinishedChallange NullInt64  `json:"finished_challange"`
+	FinishedChallange sql.NullInt32  `json:"finished_challange"`
 	JumlahChallange   int64  `json:"jumlah_challange"`
-	TotalSkor         NullInt64  `json:"total_skor"`
+	TotalSkor         sql.NullInt32  `json:"total_skor"`
 }
 
 func (q *Queries) HomeDashboard(ctx context.Context, idMahasiswa int32) (HomeDashboardRow, error) {

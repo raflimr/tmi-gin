@@ -1,1 +1,1 @@
-web: bin/tmi-gin
+web: bin\tmi.exe
