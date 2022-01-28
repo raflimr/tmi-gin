@@ -45,8 +45,7 @@ type Event struct {
 	DeskripsiEvent sql.NullString `json:"deskripsi_event"`
 	KriteriaEvent  sql.NullString `json:"kriteria_event"`
 	TanggalEvent   sql.NullString `json:"tanggal_event"`
-	IDMahasiswa    int32          `json:"id_mahasiswa"`
-	IDAdmin        sql.NullInt32  `json:"id_admin"`
+	IDAdmin        int32          `json:"id_admin"`
 	CreatedAt      sql.NullTime   `json:"created_at"`
 	FinishedAt     sql.NullTime   `json:"finished_at"`
 }
@@ -84,12 +83,35 @@ type Practice struct {
 	FinishedAt        sql.NullTime   `json:"finished_at"`
 }
 
+type ReaksiEvent struct {
+	ID             int32         `json:"id"`
+	ReaksiKomentar sql.NullInt32 `json:"reaksi_komentar"`
+	IDEvent        int32         `json:"id_event"`
+	IDMahasiswa    int32         `json:"id_mahasiswa"`
+}
+
+type ReviewEvent struct {
+	ID              int32          `json:"id"`
+	Komentar        sql.NullString `json:"komentar"`
+	TanggalKomentar sql.NullString `json:"tanggal_komentar"`
+	IDEvent         int32          `json:"id_event"`
+	IDMahasiswa     int32          `json:"id_mahasiswa"`
+}
+
 type StatusChallenge struct {
 	ID             int32         `json:"id"`
 	SkorChallenge  sql.NullInt32 `json:"skor_challenge"`
 	IDMahasiswa    int32         `json:"id_mahasiswa"`
 	IDChallenge    sql.NullInt32 `json:"id_challenge"`
 	CheckChallenge sql.NullInt32 `json:"check_challenge"`
+	FinishedAt     sql.NullTime  `json:"finishedAt"`
+}
+
+type StatusEvent struct {
+	ID             int32         `json:"id"`
+	CheckChallenge sql.NullInt32 `json:"check_challenge"`
+	IDMahasiswa    int32         `json:"id_mahasiswa"`
+	IDEvent        int32         `json:"id_event"`
 	FinishedAt     sql.NullTime  `json:"finishedAt"`
 }
 

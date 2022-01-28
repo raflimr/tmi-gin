@@ -66,6 +66,7 @@ func (server *Server) setupRouter() {
 	router.GET("/user/practice-detail", server.practiceDetail)
 	router.GET("/user/practice-statistik", server.practiceDetailStatistik)
 	router.GET("/user/practice-video", server.practiceVideoById)
+	router.GET("/user/event", server.listEvent)
 
 	authRoutes := router.Group("/").Use(authMiddleware(server.tokenMaker))
 	authRoutes.PUT("/user/update/:id", server.updateMahasiswa)

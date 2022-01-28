@@ -18,6 +18,7 @@ type Querier interface {
 	HomeDashboard(ctx context.Context, idMahasiswa int32) (HomeDashboardRow, error)
 	InfoPractice(ctx context.Context, id int32) (Practice, error)
 	InfoPracticeStatistik(ctx context.Context, id int32) (InfoPracticeStatistikRow, error)
+	ListEvent(ctx context.Context, arg ListEventParams) ([]ListEventRow, error)
 	ListPractice(ctx context.Context, arg ListPracticeParams) ([]Practice, error)
 	ListPracticeByCategory(ctx context.Context, arg ListPracticeByCategoryParams) ([]Practice, error)
 	UpdateMahasiswa(ctx context.Context, arg UpdateMahasiswaParams) error

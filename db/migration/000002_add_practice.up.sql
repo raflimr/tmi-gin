@@ -27,20 +27,6 @@ CREATE TABLE "challenge" (
   "finishedAt" timestamp
 );
 
-
-CREATE TABLE "event" (
-  "id" SERIAL PRIMARY KEY,
-  "url_foto" varchar,
-  "judul_event" varchar,
-  "deskripsi_event" varchar,
-  "kriteria_event" varchar,
-  "tanggal_event" varchar,
-  "id_mahasiswa" integer NOT NULL,
-  "id_admin" integer,
-  "created_at" timestamp,
-  "finished_at" timestamp
-);
-
 CREATE TABLE "statusChallenge" (
   "id" SERIAL PRIMARY KEY,
   "skor_challenge" integer,
